@@ -733,26 +733,12 @@ export function binloader_init () {
         log('Found USB payload: ' + usb_path + ' (' + usb_size + ' bytes)')
         utils.notify('USB payload found!\nCopying to /data...')
 
-        // Copy USB payload to /data for future use
-        if (bl_copy_file(usb_path, DATA_PAYLOAD_PATH)) {
-          log('Copied to ' + DATA_PAYLOAD_PATH)
-        } else {
-          log('Warning: Failed to copy to /data, running from USB')
-        }
-
         // Load from USB
         return bl_load_from_file(usb_path, false)
       }
     }
-
-    // Priority 2: Check for cached /data payload
-    const data_size = bl_file_exists(DATA_PAYLOAD_PATH)
-    if (data_size > 0) {
-      log('Found cached payload: ' + DATA_PAYLOAD_PATH + ' (' + data_size + ' bytes)')
-      return bl_load_from_file(DATA_PAYLOAD_PATH, false)
-    }
-
-    // Priority 3: Fall back to network loader
+    
+    // Priority 2: Fall back to network loader
     log('No payload file found, starting network loader')
     utils.notify('No payload found.\nStarting network loader...')
     return bl_network_loader()
