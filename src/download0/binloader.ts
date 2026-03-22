@@ -123,7 +123,7 @@ export function binloader_init () {
     '/mnt/usb3/.03e55d',
     '/mnt/usb4/.03e55d',
   ]
-  
+
   const DATA_PAYLOAD_PATH = '/data/payload.bin'
 
   // S_ISREG macro check - file type is regular file
@@ -798,7 +798,7 @@ export function binloader_init () {
       }
     }
 
-    // 
+    //
     for (const usb_path0 of USB_VERIFY_PATHS) {
       const verify_size = bl_file_exists(usb_path0)
 
