@@ -799,15 +799,22 @@ export function binloader_init () {
     }
 
     //
+    let found = false;
     for (const usb_path0 of USB_VERIFY_PATHS) {
-      const verify_size = bl_file_exists(usb_path0)
-
-      if (verify_size < 0) {
-        log('USB Not Found !!')
-        utils.notify('USB Not Found !!')
-        return false
+      const verify_size = bl_file_exists(usb_path0);
+    
+      if (verify_size >= 0) {
+        found = true;
+        break;
       }
     }
+    
+    if (!found) {
+      log('USB Not Found !!');
+      utils.notify('USB Not Found !!');
+      return false;
+    }
+
 
     // Priority 1: Check for USB payload on usb0-usb4 (like BD-JB does)
     for (const usb_path of USB_PAYLOAD_PATHS) {
