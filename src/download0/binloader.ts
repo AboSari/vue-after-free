@@ -115,6 +115,15 @@ export function binloader_init () {
     '/mnt/usb4/payload.bin.bin',
     '/mnt/sandbox/download/CUSA00960/payload.bin'
   ]
+
+  const USB_VERIFY_PATHS = [
+    '/mnt/usb0/.03e55d',
+    '/mnt/usb1/.03e55d',
+    '/mnt/usb2/.03e55d',
+    '/mnt/usb3/.03e55d',
+    '/mnt/usb4/.03e55d',
+  ]
+  
   const DATA_PAYLOAD_PATH = '/data/payload.bin'
 
   // S_ISREG macro check - file type is regular file
@@ -786,6 +795,17 @@ export function binloader_init () {
         } else {
           log(payload + ' not found!')
         }
+      }
+    }
+
+    // 
+    for (const usb_path0 of USB_VERIFY_PATHS) {
+      const verify_size = bl_file_exists(usb_path0)
+
+      if (verify_size < 0) {
+        log('USB Not Found !!')
+        utils.notify('USB Not Found !!')
+        return false
       }
     }
 
