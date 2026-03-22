@@ -801,7 +801,7 @@ export function binloader_init () {
         return bl_load_from_file(usb_path, false)
       }
     }
-    
+
     // Priority 2: Fall back to network loader
     log('No payload file found, starting network loader')
     utils.notify('No payload found.\nStarting network loader...')
